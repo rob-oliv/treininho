@@ -2,7 +2,9 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Treino do Rob ✨ — Gain Routine</title>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;500;600;700;800&display=swap');
@@ -14,18 +16,22 @@
 
     body {
         margin: 0;
-        padding: 24px 16px;
+        /* Otimização de Safe Area para iPhone 16 e Notch/Dynamic Island */
+        padding-top: max(24px, env(safe-area-inset-top));
+        padding-bottom: max(24px, env(safe-area-inset-bottom));
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
         font-family: 'Inter', sans-serif;
         color: #1C1A18;
-        background-color: #F6F4EE; /* Off-White Editorial */
+        background-color: #F6F4EE;
         -webkit-font-smoothing: antialiased;
         min-height: 100vh;
     }
 
-    /* HEADER - ALONGADO, FINO E OFF-WHITE */
+    /* HEADER */
     header {
         text-align: center;
-        margin-bottom: 32px;
+        margin-bottom: 24px;
         padding: 8px 0;
     }
 
@@ -44,7 +50,7 @@
         letter-spacing: 2px;
         color: #11100F;
         display: inline-block;
-        transform: scaleY(1.3); /* Efeito alongado */
+        transform: scaleY(1.3);
     }
 
     .sparkle-icon {
@@ -61,12 +67,40 @@
         font-weight: 600;
     }
 
-    /* LISTA DE TREINOS (TELA PRINCIPAL) */
     .view-container {
         max-width: 500px;
         margin: 0 auto;
     }
 
+    /* BANNER DE SEMANA CONCLUÍDA */
+    .week-completed-banner {
+        display: none;
+        background: #11100F;
+        color: #F6F4EE;
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    .week-completed-banner h3 {
+        margin: 0 0 4px 0;
+        font-size: 11pt;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .week-completed-banner p {
+        margin: 0;
+        font-size: 8pt;
+        color: #B3ADA3;
+        line-height: 1.4;
+    }
+
+    /* LISTA DE TREINOS */
     #main-view {
         display: flex;
         flex-direction: column;
@@ -90,12 +124,18 @@
         transform: scale(0.98);
     }
 
-    /* PALETA DE CORES EM HARMONIA COM BACKGROUND OFF-WHITE */
     .card-1 { background: linear-gradient(135deg, #7A1C15 0%, #52100B 100%); color: #FAF7F2; }
     .card-2 { background: linear-gradient(135deg, #D44D23 0%, #B03A14 100%); color: #FFFFFF; }
     .card-3 { background-color: #211F1D; color: #F5F2EC; }
     .card-4 { background-color: #401F22; color: #F7EFE9; }
     .card-5 { background-color: #E8E2D5; color: #8A2412; border: 1px solid #D8D0C0; }
+
+    .card-header-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 6px;
+    }
 
     .card-tag {
         font-family: 'Inter', sans-serif;
@@ -103,11 +143,25 @@
         font-weight: 700;
         letter-spacing: 1.5px;
         opacity: 0.8;
-        display: block;
-        margin-bottom: 6px;
     }
 
-    /* MISTURA DE FONTES NOS TÍTULOS */
+    /* SELO DE TREINO CONCLUÍDO NO CARD */
+    .workout-done-badge {
+        display: none;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(4px);
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 6.5pt;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .workout-card.is-done .workout-done-badge {
+        display: inline-block;
+    }
+
     .font-mix {
         display: flex;
         align-items: baseline;
@@ -146,7 +200,7 @@
         opacity: 0.6;
     }
 
-    /* TELA DO DETAIL DO TREINO */
+    /* TELA DE DETALHE */
     #detail-view {
         display: none;
         animation: fadeIn 0.25s ease-out;
@@ -183,13 +237,29 @@
     .detail-header {
         border-radius: 8px;
         padding: 24px;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        position: relative;
+    }
+
+    /* AVISO DE CONCLUÍDO NO DETALHE DO TREINO */
+    .workout-status-banner {
+        display: none;
+        background: #10B981;
+        color: #FFFFFF;
+        font-size: 8pt;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 20px;
     }
 
     /* BARRA DE PROGRESSO */
     .progress-container {
-        margin-bottom: 24px;
+        margin-bottom: 20px;
         background: #FFFFFF;
         padding: 16px;
         border-radius: 8px;
@@ -245,7 +315,6 @@
         transition: all 0.2s ease;
     }
 
-    /* EXERCÍCIO CONCLUÍDO (APENAS TACHADO, SEM BLUR) */
     .exercise-item.completed {
         background: #F1EEE8;
         border-color: #E2DDD5;
@@ -303,7 +372,6 @@
         transition: color 0.2s ease;
     }
 
-    /* TACHADO AO CONCLUIR */
     .exercise-item.completed .exercise-name {
         text-decoration: line-through;
         color: #8C857B;
@@ -315,7 +383,6 @@
         color: #78726A;
     }
 
-    /* CAMPO DE DIGITAÇÃO DE CARGA */
     .weight-box {
         display: flex;
         align-items: center;
@@ -359,12 +426,21 @@
             <p>Gain Routine Personal</p>
         </header>
 
+        <!-- BANNER DE SEMANA CONCLUÍDA -->
+        <div id="week-banner" class="week-completed-banner">
+            <h3>Semana Concluída! 🎉✨</h3>
+            <p>Todos os treinos foram finalizados! Os exercícios foram resetados para sua próxima semana (suas cargas continuam salvas).</p>
+        </div>
+
         <!-- TELA 1: LISTA DE TREINOS -->
         <div id="main-view">
             
-            <div class="workout-card card-1" onclick="openWorkout('A')">
+            <div class="workout-card card-1" id="card-A" onclick="openWorkout('A')">
                 <div>
-                    <span class="card-tag">01 — WORKOUT A</span>
+                    <div class="card-header-row">
+                        <span class="card-tag">01 — WORKOUT A</span>
+                        <span class="workout-done-badge">✓ Concluído</span>
+                    </div>
                     <div class="font-mix">
                         <span class="sans-bold">PUSH</span>
                         <span class="serif-italic">Day</span>
@@ -374,9 +450,12 @@
                 <span class="card-arrow">▼</span>
             </div>
 
-            <div class="workout-card card-2" onclick="openWorkout('B')">
+            <div class="workout-card card-2" id="card-B" onclick="openWorkout('B')">
                 <div>
-                    <span class="card-tag">02 — WORKOUT B</span>
+                    <div class="card-header-row">
+                        <span class="card-tag">02 — WORKOUT B</span>
+                        <span class="workout-done-badge">✓ Concluído</span>
+                    </div>
                     <div class="font-mix">
                         <span class="serif-italic">Lower</span>
                         <span class="sans-bold">POSTERIOR</span>
@@ -386,9 +465,12 @@
                 <span class="card-arrow">▼</span>
             </div>
 
-            <div class="workout-card card-3" onclick="openWorkout('C')">
+            <div class="workout-card card-3" id="card-C" onclick="openWorkout('C')">
                 <div>
-                    <span class="card-tag">03 — WORKOUT C</span>
+                    <div class="card-header-row">
+                        <span class="card-tag">03 — WORKOUT C</span>
+                        <span class="workout-done-badge">✓ Concluído</span>
+                    </div>
                     <div class="font-mix">
                         <span class="sans-bold">PULL</span>
                         <span class="serif-italic">Day</span>
@@ -398,9 +480,12 @@
                 <span class="card-arrow">▼</span>
             </div>
 
-            <div class="workout-card card-4" onclick="openWorkout('D')">
+            <div class="workout-card card-4" id="card-D" onclick="openWorkout('D')">
                 <div>
-                    <span class="card-tag">04 — WORKOUT D</span>
+                    <div class="card-header-row">
+                        <span class="card-tag">04 — WORKOUT D</span>
+                        <span class="workout-done-badge">✓ Concluído</span>
+                    </div>
                     <div class="font-mix">
                         <span class="serif-italic">Lower</span>
                         <span class="sans-bold">GLUTES</span>
@@ -410,9 +495,12 @@
                 <span class="card-arrow">▼</span>
             </div>
 
-            <div class="workout-card card-5" onclick="openWorkout('E')">
+            <div class="workout-card card-5" id="card-E" onclick="openWorkout('E')">
                 <div>
-                    <span class="card-tag">05 — WORKOUT E</span>
+                    <div class="card-header-row">
+                        <span class="card-tag">05 — WORKOUT E</span>
+                        <span class="workout-done-badge">✓ Concluído</span>
+                    </div>
                     <div class="font-mix">
                         <span class="sans-bold">UPPER</span>
                         <span class="serif-italic">Body</span>
@@ -435,6 +523,10 @@
                 <span id="detail-tag" class="card-tag" style="color: inherit;"></span>
                 <div id="detail-title-mix" class="font-mix"></div>
                 <div id="detail-subtitle" class="card-subtitle" style="color: inherit;"></div>
+            </div>
+
+            <div id="workout-done-banner" class="workout-status-banner">
+                ✓ Treino Concluído ✨
             </div>
 
             <!-- BARRA DE PROGRESSO -->
@@ -540,11 +632,16 @@
 
         let currentWorkoutKey = null;
 
+        document.addEventListener("DOMContentLoaded", () => {
+            updateMainCardsStatus();
+        });
+
         function openWorkout(key) {
             currentWorkoutKey = key;
             const data = workoutsData[key];
             
             document.getElementById('main-header').style.display = 'none';
+            document.getElementById('week-banner').style.display = 'none';
             document.getElementById('main-view').style.display = 'none';
             document.getElementById('detail-view').style.display = 'block';
 
@@ -565,13 +662,16 @@
             document.getElementById('main-view').style.display = 'flex';
             document.getElementById('detail-view').style.display = 'none';
             currentWorkoutKey = null;
+
+            updateMainCardsStatus();
+            checkWeekCompletion();
         }
 
         function renderExercises(exercises) {
             const listEl = document.getElementById('exercise-list');
             listEl.innerHTML = '';
 
-            const savedState = JSON.parse(localStorage.getItem('rob_workout_state_v3') || '{}');
+            const savedState = JSON.parse(localStorage.getItem('rob_workout_state_v4') || '{}');
 
             exercises.forEach(ex => {
                 const isCompleted = savedState[ex.id]?.completed || false;
@@ -619,10 +719,18 @@
 
             document.getElementById('progress-fill').style.width = percentage + '%';
             document.getElementById('progress-text').innerText = percentage + '%';
+
+            // Mostrar banner de treino concluído no detalhe
+            const statusBanner = document.getElementById('workout-done-banner');
+            if (percentage === 100) {
+                statusBanner.style.display = 'block';
+            } else {
+                statusBanner.style.display = 'none';
+            }
         }
 
         function saveProgress() {
-            const state = JSON.parse(localStorage.getItem('rob_workout_state_v3') || '{}');
+            const state = JSON.parse(localStorage.getItem('rob_workout_state_v4') || '{}');
 
             document.querySelectorAll('.exercise-item').forEach(item => {
                 const id = item.getAttribute('data-id');
@@ -633,7 +741,50 @@
                 state[id] = { completed, weight };
             });
 
-            localStorage.setItem('rob_workout_state_v3', JSON.stringify(state));
+            localStorage.setItem('rob_workout_state_v4', JSON.stringify(state));
+        }
+
+        // VERIFICA QUAIS TREINOS ESTÃO 100% PARA MARCAR NO CARD PRINCIPAL
+        function updateMainCardsStatus() {
+            const savedState = JSON.parse(localStorage.getItem('rob_workout_state_v4') || '{}');
+
+            Object.keys(workoutsData).forEach(key => {
+                const exercises = workoutsData[key].exercises;
+                const allDone = exercises.length > 0 && exercises.every(ex => savedState[ex.id]?.completed);
+                const card = document.getElementById('card-' + key);
+
+                if (card) {
+                    if (allDone) {
+                        card.classList.add('is-done');
+                    } else {
+                        card.classList.remove('is-done');
+                    }
+                }
+            });
+        }
+
+        // VERIFICA SE TODOS OS 5 TREINOS FORAM CONCLUÍDOS NA SEMANA
+        function checkWeekCompletion() {
+            const savedState = JSON.parse(localStorage.getItem('rob_workout_state_v4') || '{}');
+            const keys = Object.keys(workoutsData);
+
+            const allWorkoutsDone = keys.every(key => {
+                const exercises = workoutsData[key].exercises;
+                return exercises.length > 0 && exercises.every(ex => savedState[ex.id]?.completed);
+            });
+
+            if (allWorkoutsDone) {
+                // Mostrar banner de semana concluída
+                document.getElementById('week-banner').style.display = 'block';
+
+                // Resetar todos os checks, MAS PRESERVAR AS CARGAS (weights)
+                Object.keys(savedState).forEach(id => {
+                    savedState[id].completed = false;
+                });
+
+                localStorage.setItem('rob_workout_state_v4', JSON.stringify(savedState));
+                updateMainCardsStatus();
+            }
         }
     </script>
 </body>
