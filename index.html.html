@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Treino do Rob ✨ — Gain Routine</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        margin: 0;
+        padding: 24px 16px;
+        font-family: 'Inter', sans-serif;
+        color: #1C1A18;
+        background-color: #F6F4EE; /* Off-White Editorial */
+        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
+    }
+
+    /* HEADER - ALONGADO, FINO E OFF-WHITE */
+    header {
+        text-align: center;
+        margin-bottom: 32px;
+        padding: 8px 0;
+    }
+
+    .title-wrapper {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    header h1 {
+        font-family: 'Bodoni Moda', serif;
+        font-weight: 400;
+        font-size: 30pt;
+        text-transform: uppercase;
+        margin: 0;
+        letter-spacing: 2px;
+        color: #11100F;
+        display: inline-block;
+        transform: scaleY(1.3); /* Efeito alongado */
+    }
+
+    .sparkle-icon {
+        font-size: 18pt;
+        line-height: 1;
+    }
+
+    header p {
+        font-size: 7.5pt;
+        color: #78726A;
+        margin-top: 14px;
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+        font-weight: 600;
+    }
+
+    /* LISTA DE TREINOS (TELA PRINCIPAL) */
+    .view-container {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    #main-view {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .workout-card {
+        border-radius: 8px;
+        padding: 22px 24px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .workout-card:active {
+        transform: scale(0.98);
+    }
+
+    /* PALETA DE CORES EM HARMONIA COM BACKGROUND OFF-WHITE */
+    .card-1 { background: linear-gradient(135deg, #7A1C15 0%, #52100B 100%); color: #FAF7F2; }
+    .card-2 { background: linear-gradient(135deg, #D44D23 0%, #B03A14 100%); color: #FFFFFF; }
+    .card-3 { background-color: #211F1D; color: #F5F2EC; }
+    .card-4 { background-color: #401F22; color: #F7EFE9; }
+    .card-5 { background-color: #E8E2D5; color: #8A2412; border: 1px solid #D8D0C0; }
+
+    .card-tag {
+        font-family: 'Inter', sans-serif;
+        font-size: 7.5pt;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        opacity: 0.8;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    /* MISTURA DE FONTES NOS TÍTULOS */
+    .font-mix {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .font-mix .serif-italic {
+        font-family: 'Bodoni Moda', serif;
+        font-weight: 400;
+        font-style: italic;
+        font-size: 24pt;
+        line-height: 1;
+    }
+
+    .font-mix .sans-bold {
+        font-family: 'Inter', sans-serif;
+        font-weight: 800;
+        font-size: 20pt;
+        letter-spacing: -0.5px;
+        line-height: 1;
+    }
+
+    .card-subtitle {
+        font-size: 8.5pt;
+        font-weight: 500;
+        opacity: 0.85;
+        margin-top: 8px;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        text-decoration-thickness: 1px;
+    }
+
+    .card-arrow {
+        font-size: 12pt;
+        opacity: 0.6;
+    }
+
+    /* TELA DO DETAIL DO TREINO */
+    #detail-view {
+        display: none;
+        animation: fadeIn 0.25s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .btn-back {
+        background: transparent;
+        border: none;
+        color: #78726A;
+        font-family: 'Inter', sans-serif;
+        font-size: 8.5pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0;
+    }
+
+    .detail-header {
+        border-radius: 8px;
+        padding: 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    /* BARRA DE PROGRESSO */
+    .progress-container {
+        margin-bottom: 24px;
+        background: #FFFFFF;
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid #EAE6DF;
+    }
+
+    .progress-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 8pt;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+        color: #78726A;
+        text-transform: uppercase;
+    }
+
+    .progress-bar-bg {
+        width: 100%;
+        height: 6px;
+        background: #EAE6DF;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    .progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: #11100F;
+        border-radius: 3px;
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* LISTA DE EXERCÍCIOS */
+    .exercise-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .exercise-item {
+        background: #FFFFFF;
+        border: 1px solid #EAE6DF;
+        border-radius: 8px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        transition: all 0.2s ease;
+    }
+
+    /* EXERCÍCIO CONCLUÍDO (APENAS TACHADO, SEM BLUR) */
+    .exercise-item.completed {
+        background: #F1EEE8;
+        border-color: #E2DDD5;
+        opacity: 0.75;
+    }
+
+    .exercise-main {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex: 1;
+        cursor: pointer;
+    }
+
+    .checkbox-custom {
+        width: 20px;
+        height: 20px;
+        border: 1.5px solid #9E968C;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all 0.2s ease;
+    }
+
+    .exercise-item.completed .checkbox-custom {
+        background-color: #11100F;
+        border-color: #11100F;
+    }
+
+    .checkbox-custom::after {
+        content: '✓';
+        color: #FFFFFF;
+        font-size: 9pt;
+        font-weight: bold;
+        display: none;
+    }
+
+    .exercise-item.completed .checkbox-custom::after {
+        display: block;
+    }
+
+    .exercise-details {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .exercise-name {
+        font-size: 9.5pt;
+        font-weight: 600;
+        color: #1C1A18;
+        line-height: 1.3;
+        transition: color 0.2s ease;
+    }
+
+    /* TACHADO AO CONCLUIR */
+    .exercise-item.completed .exercise-name {
+        text-decoration: line-through;
+        color: #8C857B;
+    }
+
+    .exercise-sets {
+        font-size: 7.5pt;
+        font-weight: 500;
+        color: #78726A;
+    }
+
+    /* CAMPO DE DIGITAÇÃO DE CARGA */
+    .weight-box {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background: #F6F4EE;
+        border: 1px solid #E0DDD5;
+        padding: 6px 10px;
+        border-radius: 6px;
+    }
+
+    .weight-input {
+        width: 38px;
+        background: transparent;
+        border: none;
+        color: #1C1A18;
+        font-family: 'Inter', sans-serif;
+        font-size: 9.5pt;
+        font-weight: 700;
+        text-align: right;
+        outline: none;
+    }
+
+    .weight-unit {
+        font-size: 7pt;
+        color: #8C857B;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+</style>
+</head>
+<body>
+
+    <div class="view-container">
+        
+        <!-- HEADER -->
+        <header id="main-header">
+            <div class="title-wrapper">
+                <h1>Treino do Rob</h1>
+                <span class="sparkle-icon">✨</span>
+            </div>
+            <p>Gain Routine Personal</p>
+        </header>
+
+        <!-- TELA 1: LISTA DE TREINOS -->
+        <div id="main-view">
+            
+            <div class="workout-card card-1" onclick="openWorkout('A')">
+                <div>
+                    <span class="card-tag">01 — WORKOUT A</span>
+                    <div class="font-mix">
+                        <span class="sans-bold">PUSH</span>
+                        <span class="serif-italic">Day</span>
+                    </div>
+                    <div class="card-subtitle">Peito, Ombro & Tríceps</div>
+                </div>
+                <span class="card-arrow">▼</span>
+            </div>
+
+            <div class="workout-card card-2" onclick="openWorkout('B')">
+                <div>
+                    <span class="card-tag">02 — WORKOUT B</span>
+                    <div class="font-mix">
+                        <span class="serif-italic">Lower</span>
+                        <span class="sans-bold">POSTERIOR</span>
+                    </div>
+                    <div class="card-subtitle">Glúteo & Posterior</div>
+                </div>
+                <span class="card-arrow">▼</span>
+            </div>
+
+            <div class="workout-card card-3" onclick="openWorkout('C')">
+                <div>
+                    <span class="card-tag">03 — WORKOUT C</span>
+                    <div class="font-mix">
+                        <span class="sans-bold">PULL</span>
+                        <span class="serif-italic">Day</span>
+                    </div>
+                    <div class="card-subtitle">Costas & Bíceps</div>
+                </div>
+                <span class="card-arrow">▼</span>
+            </div>
+
+            <div class="workout-card card-4" onclick="openWorkout('D')">
+                <div>
+                    <span class="card-tag">04 — WORKOUT D</span>
+                    <div class="font-mix">
+                        <span class="serif-italic">Lower</span>
+                        <span class="sans-bold">GLUTES</span>
+                    </div>
+                    <div class="card-subtitle">Foco em Glúteos</div>
+                </div>
+                <span class="card-arrow">▼</span>
+            </div>
+
+            <div class="workout-card card-5" onclick="openWorkout('E')">
+                <div>
+                    <span class="card-tag">05 — WORKOUT E</span>
+                    <div class="font-mix">
+                        <span class="sans-bold">UPPER</span>
+                        <span class="serif-italic">Body</span>
+                    </div>
+                    <div class="card-subtitle">Peito & Braços</div>
+                </div>
+                <span class="card-arrow">▼</span>
+            </div>
+
+        </div>
+
+        <!-- TELA 2: VISÃO DO TREINO SELECIONADO -->
+        <div id="detail-view">
+            
+            <div class="top-bar">
+                <button class="btn-back" onclick="closeWorkout()">← Voltar aos Treinos</button>
+            </div>
+
+            <div id="detail-header-card" class="detail-header">
+                <span id="detail-tag" class="card-tag" style="color: inherit;"></span>
+                <div id="detail-title-mix" class="font-mix"></div>
+                <div id="detail-subtitle" class="card-subtitle" style="color: inherit;"></div>
+            </div>
+
+            <!-- BARRA DE PROGRESSO -->
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span>Progresso ✨</span>
+                    <span id="progress-text">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="progress-fill" class="progress-bar-fill"></div>
+                </div>
+            </div>
+
+            <!-- LISTA DINÂMICA DE EXERCÍCIOS -->
+            <ul id="exercise-list" class="exercise-list"></ul>
+
+        </div>
+
+    </div>
+
+    <script>
+        const workoutsData = {
+            'A': {
+                tag: '01 — WORKOUT A',
+                titleMix: '<span class="sans-bold">PUSH</span><span class="serif-italic">Day</span>',
+                subtitle: 'Peito, Ombro & Tríceps',
+                cardClass: 'card-1',
+                exercises: [
+                    { id: 'a1', name: 'Supino reto com barra', sets: '4x 8-10' },
+                    { id: 'a2', name: 'Supino inclinado com halteres', sets: '4x 8-12' },
+                    { id: 'a3', name: 'Crucifixo na máquina', sets: '3x 12-15' },
+                    { id: 'a4', name: 'Desenvolvimento com halteres', sets: '3x 8-12' },
+                    { id: 'a5', name: 'Elevação lateral', sets: '3x 12-15' },
+                    { id: 'a6', name: 'Tríceps corda', sets: '3x 10-12' },
+                    { id: 'a7', name: 'Abdominal bicicleta', sets: '3x 15-20' },
+                    { id: 'a8', name: 'Cardio', sets: '15-20 min', noWeight: true }
+                ]
+            },
+            'B': {
+                tag: '02 — WORKOUT B',
+                titleMix: '<span class="serif-italic">Lower</span><span class="sans-bold">POSTERIOR</span>',
+                subtitle: 'Glúteo & Posterior',
+                cardClass: 'card-2',
+                exercises: [
+                    { id: 'b1', name: 'Elevação pélvica', sets: '4x 8-12', defaultWeight: '100' },
+                    { id: 'b2', name: 'Stiff', sets: '4x 8-12' },
+                    { id: 'b3', name: 'Mesa flexora', sets: '3x 10-12', defaultWeight: '30' },
+                    { id: 'b4', name: 'Afundo com passada longa', sets: '3x 10', defaultWeight: '12' },
+                    { id: 'b5', name: 'Cadeira abdutora', sets: '3x 15-20', defaultWeight: '35' },
+                    { id: 'b6', name: 'Panturrilha', sets: '4x 15-20', defaultWeight: '25' },
+                    { id: 'b7', name: 'Abdominal bicicleta', sets: '3x 15-20' },
+                    { id: 'b8', name: 'Cardio', sets: '15-20 min', noWeight: true }
+                ]
+            },
+            'C': {
+                tag: '03 — WORKOUT C',
+                titleMix: '<span class="sans-bold">PULL</span><span class="serif-italic">Day</span>',
+                subtitle: 'Costas & Bíceps',
+                cardClass: 'card-3',
+                exercises: [
+                    { id: 'c1', name: 'Puxada pela frente pegada aberta', sets: '4x 8-12' },
+                    { id: 'c2', name: 'Remada baixa', sets: '4x 8-12' },
+                    { id: 'c3', name: 'Remada unilateral com halter', sets: '3x 10-12 cada lado' },
+                    { id: 'c4', name: 'Rosca direta com barra', sets: '3x 8-12' },
+                    { id: 'c5', name: 'Rosca martelo', sets: '3x 10-12' },
+                    { id: 'c6', name: 'Rosca inclinada com halteres', sets: '3x 10-12' },
+                    { id: 'c7', name: 'Prancha', sets: '3x 30-60s', noWeight: true },
+                    { id: 'c8', name: 'Cardio', sets: '15-20 min', noWeight: true }
+                ]
+            },
+            'D': {
+                tag: '04 — WORKOUT D',
+                titleMix: '<span class="serif-italic">Lower</span><span class="sans-bold">GLUTES</span>',
+                subtitle: 'Foco em Glúteos',
+                cardClass: 'card-4',
+                exercises: [
+                    { id: 'd1', name: 'Agachamento com halteres', sets: '4x 8-12' },
+                    { id: 'd2', name: 'Leg press', sets: '4x 10-12' },
+                    { id: 'd3', name: 'Cadeira extensora', sets: '3x 12-15' },
+                    { id: 'd4', name: 'Elevação pélvica', sets: '4x 10-12' },
+                    { id: 'd5', name: 'Coice no cabo', sets: '3x 12-15 cada perna' },
+                    { id: 'd6', name: 'Panturrilha sentada', sets: '4x 15-20' },
+                    { id: 'd7', name: 'Cardio', sets: '15-20 min', noWeight: true }
+                ]
+            },
+            'E': {
+                tag: '05 — WORKOUT E',
+                titleMix: '<span class="sans-bold">UPPER</span><span class="serif-italic">Body</span>',
+                subtitle: 'Peito & Braços',
+                cardClass: 'card-5',
+                exercises: [
+                    { id: 'e1', name: 'Supino inclinado com halteres', sets: '4x 8-12' },
+                    { id: 'e2', name: 'Crossover na polia', sets: '3x 12-15' },
+                    { id: 'e3', name: 'Rosca direta', sets: '3x 8-12' },
+                    { id: 'e4', name: 'Rosca martelo', sets: '3x 10-12' },
+                    { id: 'e5', name: 'Tríceps corda', sets: '3x 10-12' },
+                    { id: 'e6', name: 'Tríceps francês', sets: '3x 10-12' },
+                    { id: 'e7', name: 'Abdominal infra', sets: '3x 12-15' },
+                    { id: 'e8', name: 'Cardio', sets: '15-20 min', noWeight: true }
+                ]
+            }
+        };
+
+        let currentWorkoutKey = null;
+
+        function openWorkout(key) {
+            currentWorkoutKey = key;
+            const data = workoutsData[key];
+            
+            document.getElementById('main-header').style.display = 'none';
+            document.getElementById('main-view').style.display = 'none';
+            document.getElementById('detail-view').style.display = 'block';
+
+            const headerCard = document.getElementById('detail-header-card');
+            headerCard.className = 'detail-header ' + data.cardClass;
+
+            document.getElementById('detail-tag').innerText = data.tag;
+            document.getElementById('detail-title-mix').innerHTML = data.titleMix;
+            document.getElementById('detail-subtitle').innerText = data.subtitle;
+
+            renderExercises(data.exercises);
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function closeWorkout() {
+            document.getElementById('main-header').style.display = 'block';
+            document.getElementById('main-view').style.display = 'flex';
+            document.getElementById('detail-view').style.display = 'none';
+            currentWorkoutKey = null;
+        }
+
+        function renderExercises(exercises) {
+            const listEl = document.getElementById('exercise-list');
+            listEl.innerHTML = '';
+
+            const savedState = JSON.parse(localStorage.getItem('rob_workout_state_v3') || '{}');
+
+            exercises.forEach(ex => {
+                const isCompleted = savedState[ex.id]?.completed || false;
+                const savedWeight = savedState[ex.id]?.weight ?? (ex.defaultWeight || '');
+
+                const li = document.createElement('li');
+                li.className = 'exercise-item' + (isCompleted ? ' completed' : '');
+                li.setAttribute('data-id', ex.id);
+
+                const weightHTML = ex.noWeight ? '' : `
+                    <div class="weight-box">
+                        <input type="number" class="weight-input" placeholder="0" value="${savedWeight}" onchange="saveProgress()">
+                        <span class="weight-unit">kg</span>
+                    </div>
+                `;
+
+                li.innerHTML = `
+                    <div class="exercise-main" onclick="toggleExercise(this)">
+                        <div class="checkbox-custom"></div>
+                        <div class="exercise-details">
+                            <span class="exercise-name">${ex.name}</span>
+                            <span class="exercise-sets">${ex.sets}</span>
+                        </div>
+                    </div>
+                    ${weightHTML}
+                `;
+
+                listEl.appendChild(li);
+            });
+        }
+
+        function toggleExercise(mainEl) {
+            const item = mainEl.parentElement;
+            item.classList.toggle('completed');
+            saveProgress();
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const items = document.querySelectorAll('.exercise-item');
+            if (items.length === 0) return;
+
+            const completedCount = document.querySelectorAll('.exercise-item.completed').length;
+            const percentage = Math.round((completedCount / items.length) * 100);
+
+            document.getElementById('progress-fill').style.width = percentage + '%';
+            document.getElementById('progress-text').innerText = percentage + '%';
+        }
+
+        function saveProgress() {
+            const state = JSON.parse(localStorage.getItem('rob_workout_state_v3') || '{}');
+
+            document.querySelectorAll('.exercise-item').forEach(item => {
+                const id = item.getAttribute('data-id');
+                const completed = item.classList.contains('completed');
+                const weightInput = item.querySelector('.weight-input');
+                const weight = weightInput ? weightInput.value : '';
+
+                state[id] = { completed, weight };
+            });
+
+            localStorage.setItem('rob_workout_state_v3', JSON.stringify(state));
+        }
+    </script>
+</body>
+</html>
