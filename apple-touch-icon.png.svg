@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" fill="#7A1C15"/>
+  <rect x="36" y="36" width="440" height="440" fill="none" stroke="#FAF7F2" stroke-width="3" opacity="0.25"/>
+  <text x="50%" y="54%" font-family="'Inter', sans-serif" font-weight="800" font-size="130" text-anchor="middle" dominant-baseline="middle" fill="#FAF7F2" letter-spacing="-1">ROB.</text>
+</svg>
