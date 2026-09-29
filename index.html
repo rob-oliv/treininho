@@ -3,25 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>ROB. RAW EDITION 8.0</title>
+<title>ROB. RAW EDITION 8.1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
-    /* VARIABLES (Pure Minimalist Palette) */
+    /* VARIABLES (Nova Paleta Acinzentada/Branca) */
     :root {
-        --creme: #E8E4D9;
-        --marrom: #4A3A2C;
-        --vermelho: #E03526;
-        --preto: #1A1A1A;
-        --cinza: #949490;
-        --creme-claro: #F2EFE8;
+        --bg: #F4F4F4;        /* Cinza muito claro (fundo do app) */
+        --branco: #FFFFFF;    /* Branco puro (fundo dos cards) */
+        --marrom: #3D3D3D;    /* Cinza Chumbo Escuro (textos secundários) */
+        --vermelho: #E03526;  /* Vermelho Endorfina */
+        --preto: #111111;     /* Preto Absoluto */
+        --cinza: #999999;     /* Cinza médio */
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
-        background-color: var(--creme);
+        background-color: var(--bg);
         color: var(--preto);
         font-family: 'Manrope', sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -46,10 +46,10 @@
     .view.active { display: block; }
     @keyframes smoothFade { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* HEADER */
-    header { display: flex; justify-content: space-between; align-items: center; padding: max(32px, env(safe-area-inset-top)) 24px 16px 24px; position: sticky; top: 0; background: var(--creme); z-index: 10;}
+    /* HEADER GERAL */
+    header { display: flex; justify-content: space-between; align-items: center; padding: max(32px, env(safe-area-inset-top)) 24px 16px 24px; position: sticky; top: 0; background: var(--bg); z-index: 10;}
     .logo { font-size: 2.4rem; color: var(--preto); line-height: 1; }
-    .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--vermelho); color: var(--creme); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--vermelho); color: var(--branco); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 
     .section-title { font-size: 0.75rem; color: var(--marrom); margin-bottom: 24px; font-weight: 800; letter-spacing: 1.5px; }
 
@@ -62,18 +62,18 @@
     .mood-row { display: flex; gap: 12px; margin-bottom: 48px; overflow-x: auto; padding-bottom: 12px; }
     .mood-row::-webkit-scrollbar { display: none; }
     .mood-btn { 
-        background: transparent; border: 2px solid var(--marrom); border-radius: 100px;
+        background: var(--branco); border: 2px solid var(--marrom); border-radius: 100px;
         font-size: 0.9rem; color: var(--marrom); cursor: pointer; transition: all 0.2s; 
         font-weight: 800; padding: 10px 16px; white-space: nowrap; 
     }
-    .mood-btn.selected { background: var(--marrom); color: var(--creme); }
+    .mood-btn.selected { background: var(--marrom); color: var(--branco); }
 
     /* CALENDÁRIO SEMANAL DA HOME */
     .weekly-cal { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 32px;}
     .cal-day { display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .cal-lbl { font-size: 0.65rem; font-weight: 800; color: var(--cinza); }
-    .cal-circle { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--marrom); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; color: transparent; transition: all 0.3s; }
-    .cal-day.done .cal-circle { background: var(--vermelho); border-color: var(--vermelho); color: var(--creme); }
+    .cal-circle { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--marrom); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; color: transparent; transition: all 0.3s; background: var(--branco);}
+    .cal-day.done .cal-circle { background: var(--vermelho); border-color: var(--vermelho); color: var(--branco); }
     .cal-day.done .cal-lbl { color: var(--vermelho); }
 
     /* FICHAS CARDS */
@@ -84,8 +84,9 @@
         min-height: 160px;
     }
     .ficha-card:active { transform: scale(0.97); }
-    .card-light { background: var(--creme-claro); border: 2px solid var(--preto); color: var(--preto); }
-    .card-dark { background: var(--marrom); color: var(--creme); border: 2px solid var(--marrom); }
+    
+    .card-light { background: var(--branco); border: 2px solid var(--preto); color: var(--preto); }
+    .card-dark { background: var(--preto); color: var(--branco); border: 2px solid var(--preto); }
 
     .ficha-bg-graphic {
         position: absolute; right: -10%; bottom: -20%; font-size: 12rem; color: var(--vermelho); opacity: 0.3;
@@ -104,19 +105,26 @@
 
     /* PROGRESS BAR */
     .progress-track { width: 100%; height: 6px; background: rgba(0,0,0,0.1); border-radius: 100px; overflow: hidden; z-index: 2; position: relative; margin-bottom: 6px; }
-    .card-dark .progress-track { background: rgba(255,255,255,0.1); }
+    .card-dark .progress-track { background: rgba(255,255,255,0.2); }
     .progress-fill { height: 100%; background: var(--vermelho); border-radius: 100px; width: 0%; transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
     .progress-lbl { font-size: 0.75rem; font-weight: 800; z-index: 2; position: relative; }
 
-    /* WORKOUT ENGINE (LISTA CLARA E SEPARADA) */
-    .workout-header-bar { margin-bottom: 32px; position: sticky; top: 0; background: var(--creme); padding: 24px 0 16px 0; z-index: 10; border-bottom: 2px solid var(--preto); }
+    /* ================= WORKOUT ENGINE (LISTA DEMARCADA) ================= */
+    
+    /* HEADER VAZADO RESOLVIDO (Fundo sólido, margens negativas para preencher tela) */
+    .workout-header-bar { 
+        margin: -24px -24px 32px -24px; /* Sangria pra cobrir todo o espaço */
+        padding: max(24px, env(safe-area-inset-top)) 24px 16px 24px; 
+        position: sticky; top: 0; background: var(--bg); z-index: 100; 
+        border-bottom: 2px solid var(--preto); 
+    }
     .workout-header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
     .workout-prog-track { width: 100%; height: 4px; background: rgba(0,0,0,0.1); border-radius: 100px; overflow: hidden; }
     .workout-prog-fill { width: 0%; height: 100%; background: var(--vermelho); transition: width 0.3s ease; }
     
-    /* MUDANÇA AQUI: CARDS DEMARCADOS PARA EXERCÍCIOS */
+    /* CARDS DE EXERCÍCIOS */
     .exercise-card { 
-        background: var(--creme-claro); border: 2px solid var(--preto); border-radius: 16px; 
+        background: var(--branco); border: 2px solid var(--preto); border-radius: 16px; 
         padding: 24px; margin-bottom: 24px; position: relative; transition: all 0.4s ease;
     }
     .exercise-card.completed { opacity: 0.4; filter: grayscale(1); border-color: var(--cinza); }
@@ -140,16 +148,16 @@
     /* BUBBLES */
     .set-bubbles { display: flex; gap: 12px; flex-wrap: wrap; position: relative; }
     .bubble { 
-        width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--preto); background: transparent; color: var(--preto); 
+        width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--preto); background: var(--bg); color: var(--preto); 
         font-size: 1.2rem; font-weight: 800; font-family: 'Manrope', sans-serif; display: flex; align-items: center; justify-content: center; 
         cursor: pointer; transition: all 0.2s ease;
     }
-    .bubble.done { background: var(--vermelho); color: var(--creme); border-color: var(--vermelho); }
+    .bubble.done { background: var(--vermelho); color: var(--branco); border-color: var(--vermelho); }
     .bubble-cardio { width: auto; padding: 0 24px; border-radius: 100px; font-style: italic; font-family: 'Playfair Display', serif; }
 
     /* MASSIVE BUTTON */
     .btn-massive { 
-        width: 100%; padding: 24px; background: var(--preto); color: var(--creme); border: none; border-radius: 100px; 
+        width: 100%; padding: 24px; background: var(--preto); color: var(--branco); border: none; border-radius: 100px; 
         font-size: 1rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; 
         cursor: pointer; transition: transform 0.2s; display: flex; justify-content: center; align-items: center;
     }
@@ -159,45 +167,47 @@
     /* NAV */
     .nav-bar { 
         position: fixed; bottom: max(32px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); 
-        background: rgba(232, 228, 217, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-        padding: 8px; border-radius: 100px; display: flex; gap: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); z-index: 100; border: 1px solid rgba(0,0,0,0.05);
+        background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        padding: 8px; border-radius: 100px; display: flex; gap: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); z-index: 100; border: 1px solid rgba(0,0,0,0.05);
     }
     .nav-link { 
         padding: 12px 24px; border-radius: 100px; border: none; background: transparent; color: var(--marrom); font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s;
     }
-    .nav-link.active { background: var(--marrom); color: var(--creme); }
+    .nav-link.active { background: var(--preto); color: var(--branco); }
 
     /* TOAST */
     .toast-wrapper { position: fixed; top: max(32px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); z-index: 500; pointer-events: none; }
-    .toast { background: var(--preto); color: var(--creme); padding: 14px 24px; border-radius: 100px; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.5px; opacity: 0; transform: translateY(-20px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); white-space: nowrap; box-shadow: 0 8px 20px rgba(0,0,0,0.15);}
+    .toast { background: var(--preto); color: var(--branco); padding: 14px 24px; border-radius: 100px; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.5px; opacity: 0; transform: translateY(-20px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); white-space: nowrap; box-shadow: 0 8px 20px rgba(0,0,0,0.15);}
     .toast.show { opacity: 1; transform: translateY(0); }
 
     /* OVERLAYS */
-    .overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--vermelho); color: var(--creme); z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; cursor: pointer; }
+    .overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--vermelho); color: var(--branco); z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; cursor: pointer; }
     .overlay.active { opacity: 1; pointer-events: auto; }
     .overlay h1 { font-size: 6rem; line-height: 0.8; letter-spacing: -3px; margin-bottom: 24px; }
     .overlay p { font-size: 1.5rem; opacity: 0.9; }
 
     /* ================= PERFIL & FUNCIONALIDADES ÚTEIS ================= */
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
-    .stat-card { background: transparent; border: 2px solid var(--preto); border-radius: 20px; padding: 24px; text-align: center; }
+    .stat-card { background: var(--branco); border: 2px solid var(--preto); border-radius: 20px; padding: 24px; text-align: center; }
     .stat-val { font-family: 'Bricolage Grotesque'; font-size: 3.5rem; color: var(--vermelho); line-height: 1; }
     .stat-lbl { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-top: 8px; color: var(--preto); }
 
-    /* Widget: Calculadora de 1RM */
-    .widget-box { background: var(--preto); color: var(--creme); border-radius: 20px; padding: 24px; margin-bottom: 40px; position: relative; overflow: hidden;}
+    /* Widget: Calculadora de 1RM Refinada */
+    .widget-box { background: var(--preto); color: var(--branco); border-radius: 20px; padding: 24px; margin-bottom: 40px; }
     .widget-title { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 16px; display: flex; justify-content: space-between;}
-    .calc-row { display: flex; gap: 12px; margin-bottom: 16px;}
-    .calc-input { flex: 1; background: transparent; border: 1px solid var(--cinza); border-radius: 8px; padding: 12px; color: var(--creme); font-family: 'Bricolage Grotesque'; font-size: 1.2rem; text-align: center; outline: none; }
-    .calc-input::placeholder { color: var(--cinza); font-family: 'Manrope'; font-size: 0.9rem;}
-    .btn-calc { background: var(--vermelho); color: var(--creme); border: none; border-radius: 8px; padding: 12px; font-weight: 800; width: 100%; cursor: pointer;}
-    .calc-result { margin-top: 16px; font-size: 0.85rem; color: var(--creme); border-top: 1px dashed var(--cinza); padding-top: 16px; display: none;}
-    .calc-result span { font-family: 'Bricolage Grotesque'; font-size: 1.4rem; color: var(--vermelho); }
+    
+    .calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .calc-lbl { font-size: 0.65rem; color: var(--cinza); font-weight: 800; text-transform: uppercase; margin-bottom: 6px; }
+    .calc-input { width: 100%; background: transparent; border: 1px solid var(--cinza); border-radius: 8px; padding: 14px; color: var(--branco); font-family: 'Bricolage Grotesque'; font-size: 1.3rem; text-align: center; outline: none; }
+    .btn-calc { background: var(--vermelho); color: var(--branco); border: none; border-radius: 8px; padding: 14px; font-weight: 800; width: 100%; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;}
+    
+    .calc-result { margin-top: 20px; font-size: 0.85rem; color: var(--branco); border-top: 1px dashed var(--cinza); padding-top: 20px; display: none; text-align: center;}
+    .calc-result span { font-family: 'Bricolage Grotesque'; font-size: 2.2rem; color: var(--vermelho); display: block; margin: 4px 0;}
 
     /* Widget: Peso Corporal */
-    .weight-log-box { background: transparent; border: 2px solid var(--preto); border-radius: 20px; padding: 24px; margin-bottom: 40px; display: flex; align-items: center; justify-content: space-between;}
+    .weight-log-box { background: var(--branco); border: 2px solid var(--preto); border-radius: 20px; padding: 24px; margin-bottom: 40px; display: flex; align-items: center; justify-content: space-between;}
     .wl-input { width: 80px; background: transparent; border: none; border-bottom: 2px solid var(--preto); font-family: 'Bricolage Grotesque'; font-size: 2.2rem; color: var(--vermelho); text-align: center; outline: none; }
-    .wl-btn { background: var(--preto); color: var(--creme); padding: 10px 16px; border-radius: 100px; font-weight: 800; font-size: 0.8rem; border: none; cursor: pointer; text-transform: uppercase;}
+    .wl-btn { background: var(--preto); color: var(--branco); padding: 10px 16px; border-radius: 100px; font-weight: 800; font-size: 0.8rem; border: none; cursor: pointer; text-transform: uppercase;}
 
     /* Heatmap Text-based */
     .heatmap-list { font-family: monospace; font-size: 1rem; color: var(--marrom); margin-bottom: 48px; line-height: 1.6; }
@@ -266,22 +276,32 @@
             </div>
         </div>
 
-        <!-- CALCULADORA DE 1RM (Novo!) -->
+        <!-- CALCULADORA DE 1RM (Ajustada) -->
         <div class="widget-box">
             <div class="widget-title">CALCULADORA DE 1RM <span style="color: var(--vermelho);">✱</span></div>
-            <p style="font-size: 0.8rem; color: var(--cinza); margin-bottom: 16px; line-height: 1.4;">Estime sua carga máxima de 1 repetição para calibrar seus treinos.</p>
+            <p style="font-size: 0.8rem; color: var(--cinza); margin-bottom: 24px; line-height: 1.4;">Estime sua carga máxima de 1 repetição (1RM).</p>
+            
             <div class="calc-row">
-                <input type="number" id="rm-peso" class="calc-input" placeholder="Carga (kg)">
-                <input type="number" id="rm-reps" class="calc-input" placeholder="Reps">
+                <div>
+                    <div class="calc-lbl">Carga (kg)</div>
+                    <input type="number" id="rm-peso" class="calc-input">
+                </div>
+                <div>
+                    <div class="calc-lbl">Repetições</div>
+                    <input type="number" id="rm-reps" class="calc-input">
+                </div>
             </div>
+            
             <button class="btn-calc" onclick="calcularRM()">CALCULAR MÁXIMA</button>
+            
             <div class="calc-result" id="rm-result">
-                Estimativa 1RM: <br><span id="rm-max">0 KG</span><br>
-                <div style="font-size: 0.75rem; color: var(--cinza); margin-top: 8px;">80% Carga de Trabalho: <strong style="color:var(--creme);" id="rm-80">0 kg</strong></div>
+                ESTIMATIVA DE 1RM 
+                <span id="rm-max">0 KG</span>
+                <div style="font-size: 0.75rem; color: var(--cinza); margin-top: 12px; text-transform: uppercase; font-weight: 800;">80% Carga de Trabalho: <strong style="color:var(--branco);" id="rm-80">0 kg</strong></div>
             </div>
         </div>
 
-        <!-- TRACKER DE PESO CORPORAL (Novo!) -->
+        <!-- TRACKER DE PESO CORPORAL -->
         <div class="section-title uppercase">PESO CORPORAL</div>
         <div class="weight-log-box">
             <div>
@@ -328,14 +348,14 @@
     <div id="done-overlay" class="overlay" onclick="closeOverlay()">
         <h1 class="display-font">VOCÊ<br>FOI.</h1>
         <p class="serif italic" id="finish-quote">Pagou o preço. Pode descansar.</p>
-        <div style="font-size: 1.2rem; font-weight: 800; margin-top: 24px; color: var(--creme);" id="finish-time">⏱ 0 MINUTOS</div>
+        <div style="font-size: 1.2rem; font-weight: 800; margin-top: 24px; color: var(--branco);" id="finish-time">⏱ 0 MINUTOS</div>
         <div style="font-size: 0.7rem; font-weight: 800; letter-spacing: 1px; margin-top: 48px; opacity: 0.5;">TOCAR PARA VOLTAR</div>
     </div>
 
     <div id="week-overlay" class="overlay" style="background: var(--preto);" onclick="closeOverlay()">
         <h1 class="display-font">SEMANA<br>ZERADA.</h1>
         <p class="serif italic" style="color: var(--vermelho);">Você amassou 5/5. Impecável.</p>
-        <div style="font-size: 0.7rem; font-weight: 800; letter-spacing: 1px; margin-top: 48px; opacity: 0.5; color: var(--creme);">PROGRESSO RESETADO AUTOMATICAMENTE</div>
+        <div style="font-size: 0.7rem; font-weight: 800; letter-spacing: 1px; margin-top: 48px; opacity: 0.5; color: var(--branco);">PROGRESSO RESETADO AUTOMATICAMENTE</div>
     </div>
 
 </div>
@@ -438,7 +458,6 @@
         
         document.getElementById('current-location').innerText = `${dateStr} · SANTO ESTÊVÃO, BA · ...°C`;
 
-        // API de Tempo Real do Open-Meteo (Gratuita, sem chave)
         fetch('https://api.open-meteo.com/v1/forecast?latitude=-12.43&longitude=-39.25&current_weather=true')
             .then(res => res.json())
             .then(data => {
@@ -457,7 +476,6 @@
         const dayLabels = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
         
         let html = '';
-        // Mostramos de Segunda (1) a Domingo (0) ou Dom a Sáb. Vamos fazer normal DOM a SÁB
         for(let i=0; i<7; i++) {
             const isDone = historyDays.includes(i) ? 'done' : '';
             html += `<div class="cal-day ${isDone}"><div class="cal-lbl">${dayLabels[i]}</div><div class="cal-circle">✓</div></div>`;
