@@ -3,19 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>ROB. RAW EDITION 8.1</title>
+
+<!-- MÁGICA PARA O IPHONE (Web App Capable) -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="rob.">
+<title>rob.</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+
+<!-- SCRIPT GERADOR DO ÍCONE "rob." PRO IPHONE -->
+<script>
+    (function() {
+        var canvas = document.createElement('canvas');
+        canvas.width = 512;
+        canvas.height = 512;
+        var ctx = canvas.getContext('2d');
+        
+        // Fundo Vermelho
+        ctx.fillStyle = '#E03526';
+        ctx.fillRect(0, 0, 512, 512);
+        
+        // Texto Branco
+        ctx.fillStyle = '#FFFFFF';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        // Usando a fonte do sistema da Apple super grossa para garantir que carregue instantaneamente
+        ctx.font = '800 180px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+        ctx.letterSpacing = '-5px';
+        ctx.fillText('rob.', 256, 276);
+        
+        var link = document.createElement('link');
+        link.rel = 'apple-touch-icon';
+        link.href = canvas.toDataURL('image/png');
+        document.head.appendChild(link);
+    })();
+</script>
+
 <style>
-    /* VARIABLES (Nova Paleta Acinzentada/Branca) */
+    /* VARIABLES (Paleta Acinzentada/Branca) */
     :root {
-        --bg: #F4F4F4;        /* Cinza muito claro (fundo do app) */
-        --branco: #FFFFFF;    /* Branco puro (fundo dos cards) */
-        --marrom: #3D3D3D;    /* Cinza Chumbo Escuro (textos secundários) */
-        --vermelho: #E03526;  /* Vermelho Endorfina */
-        --preto: #111111;     /* Preto Absoluto */
-        --cinza: #999999;     /* Cinza médio */
+        --bg: #F4F4F4;        
+        --branco: #FFFFFF;    
+        --marrom: #3D3D3D;    
+        --vermelho: #E03526;  
+        --preto: #111111;     
+        --cinza: #999999;     
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -109,11 +144,9 @@
     .progress-fill { height: 100%; background: var(--vermelho); border-radius: 100px; width: 0%; transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
     .progress-lbl { font-size: 0.75rem; font-weight: 800; z-index: 2; position: relative; }
 
-    /* ================= WORKOUT ENGINE (LISTA DEMARCADA) ================= */
-    
-    /* HEADER VAZADO RESOLVIDO (Fundo sólido, margens negativas para preencher tela) */
+    /* WORKOUT ENGINE */
     .workout-header-bar { 
-        margin: -24px -24px 32px -24px; /* Sangria pra cobrir todo o espaço */
+        margin: -24px -24px 32px -24px; 
         padding: max(24px, env(safe-area-inset-top)) 24px 16px 24px; 
         position: sticky; top: 0; background: var(--bg); z-index: 100; 
         border-bottom: 2px solid var(--preto); 
@@ -122,7 +155,6 @@
     .workout-prog-track { width: 100%; height: 4px; background: rgba(0,0,0,0.1); border-radius: 100px; overflow: hidden; }
     .workout-prog-fill { width: 0%; height: 100%; background: var(--vermelho); transition: width 0.3s ease; }
     
-    /* CARDS DE EXERCÍCIOS */
     .exercise-card { 
         background: var(--branco); border: 2px solid var(--preto); border-radius: 16px; 
         padding: 24px; margin-bottom: 24px; position: relative; transition: all 0.4s ease;
@@ -186,21 +218,19 @@
     .overlay h1 { font-size: 6rem; line-height: 0.8; letter-spacing: -3px; margin-bottom: 24px; }
     .overlay p { font-size: 1.5rem; opacity: 0.9; }
 
-    /* ================= PERFIL & FUNCIONALIDADES ÚTEIS ================= */
+    /* PERFIL */
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
     .stat-card { background: var(--branco); border: 2px solid var(--preto); border-radius: 20px; padding: 24px; text-align: center; }
     .stat-val { font-family: 'Bricolage Grotesque'; font-size: 3.5rem; color: var(--vermelho); line-height: 1; }
     .stat-lbl { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-top: 8px; color: var(--preto); }
 
-    /* Widget: Calculadora de 1RM Refinada */
+    /* Widget: Calculadora de 1RM */
     .widget-box { background: var(--preto); color: var(--branco); border-radius: 20px; padding: 24px; margin-bottom: 40px; }
     .widget-title { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 16px; display: flex; justify-content: space-between;}
-    
     .calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
     .calc-lbl { font-size: 0.65rem; color: var(--cinza); font-weight: 800; text-transform: uppercase; margin-bottom: 6px; }
     .calc-input { width: 100%; background: transparent; border: 1px solid var(--cinza); border-radius: 8px; padding: 14px; color: var(--branco); font-family: 'Bricolage Grotesque'; font-size: 1.3rem; text-align: center; outline: none; }
     .btn-calc { background: var(--vermelho); color: var(--branco); border: none; border-radius: 8px; padding: 14px; font-weight: 800; width: 100%; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;}
-    
     .calc-result { margin-top: 20px; font-size: 0.85rem; color: var(--branco); border-top: 1px dashed var(--cinza); padding-top: 20px; display: none; text-align: center;}
     .calc-result span { font-family: 'Bricolage Grotesque'; font-size: 2.2rem; color: var(--vermelho); display: block; margin: 4px 0;}
 
@@ -248,17 +278,13 @@
         </div>
 
         <div class="section-title uppercase" style="margin-top: 24px;">SEMANA ATUAL</div>
-        <div class="weekly-cal" id="weekly-cal">
-            <!-- Renderizado via JS -->
-        </div>
+        <div class="weekly-cal" id="weekly-cal"></div>
     </main>
 
     <!-- ==================== FICHAS ==================== -->
     <main id="view-fichas" class="view">
         <div class="section-title uppercase">SUAS ROTINAS</div>
-        <div class="fichas-grid" id="fichas-list">
-            <!-- Injetado via JS -->
-        </div>
+        <div class="fichas-grid" id="fichas-list"></div>
     </main>
 
     <!-- ==================== PERFIL (CENTRAL DE DADOS) ==================== -->
@@ -276,7 +302,7 @@
             </div>
         </div>
 
-        <!-- CALCULADORA DE 1RM (Ajustada) -->
+        <!-- CALCULADORA DE 1RM -->
         <div class="widget-box">
             <div class="widget-title">CALCULADORA DE 1RM <span style="color: var(--vermelho);">✱</span></div>
             <p style="font-size: 0.8rem; color: var(--cinza); margin-bottom: 24px; line-height: 1.4;">Estime sua carga máxima de 1 repetição (1RM).</p>
@@ -315,14 +341,12 @@
         </div>
 
         <div class="section-title uppercase">VOLUME CORPORAL (SEMANA)</div>
-        <div class="heatmap-list" id="heatmap-list">
-            <!-- Injetado via JS -->
-        </div>
+        <div class="heatmap-list" id="heatmap-list"></div>
 
         <button class="btn-massive outline" onclick="resetFichas()">RESETAR DADOS DA SEMANA ↺</button>
     </main>
 
-    <!-- ==================== WORKOUT ENGINE (LISTA DEMARCADA) ==================== -->
+    <!-- ==================== WORKOUT ENGINE ==================== -->
     <main id="view-workout" class="view" style="padding-top: 0;">
         <div class="workout-header-bar">
             <div class="workout-header-top">
@@ -333,7 +357,6 @@
                 <div class="workout-prog-fill" id="workout-prog-fill"></div>
             </div>
         </div>
-
         <div id="exercise-list"></div>
     </main>
 
@@ -361,7 +384,6 @@
 </div>
 
 <script>
-    /* DADOS REAIS & DICAS EDITORIAIS */
     const routines = {
         'A': {
             title: 'push day', sub: 'Peito, Ombro & Tríceps', style: 'card-light', graphic: true,
@@ -438,18 +460,15 @@
     let activeWorkoutKey = null;
     let workoutStartTime = 0;
 
-    /* INICIALIZAÇÃO */
     document.addEventListener("DOMContentLoaded", () => {
         renderFichas();
         updateProfileStats();
         setupHome();
         
-        // Puxa peso salvo
         const savedW = localStorage.getItem('rob_body_weight');
         if(savedW) document.getElementById('body-weight-input').value = savedW;
     });
 
-    /* SETUP HOME: DATA, LOCAL E TEMPERATURA (REAL TIME API) */
     function setupHome() {
         const days = ['DOMINGO', 'SEGUNDA', 'TERÇA', 'QUARTA', 'QUINTA', 'SEXTA', 'SÁBADO'];
         const months = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
@@ -483,7 +502,6 @@
         calContainer.innerHTML = html;
     }
 
-    /* NAVEGAÇÃO */
     function switchView(viewId, btn) {
         document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
         document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
@@ -501,7 +519,6 @@
         showToast("Energia registrada. Só vai!");
     }
 
-    /* RENDER FICHAS */
     function renderFichas() {
         const list = document.getElementById('fichas-list');
         const state = JSON.parse(localStorage.getItem('rob_workout_state_v8') || '{}');
@@ -544,7 +561,6 @@
         list.innerHTML = html;
     }
 
-    /* ENGINE DO TREINO (CARDS DEMARCADOS) */
     function openWorkout(key) {
         workoutStartTime = Date.now();
         activeWorkoutKey = key;
@@ -621,7 +637,6 @@
         localStorage.setItem('rob_loads_v8', JSON.stringify(savedLoads));
     }
 
-    /* MARCAR SÉRIES & PROGRESSO NO HEADER */
     function markSet(btn, exId, setNum, totalSetsInEx) {
         btn.classList.toggle('done');
         const isNowDone = btn.classList.contains('done');
@@ -636,7 +651,6 @@
             state[activeWorkoutKey][exId] = state[activeWorkoutKey][exId].filter(n => n !== setNum);
         }
         
-        // Verifica se completou o exercício para apagar o card (Diferencial visual)
         const exWrap = document.getElementById(`wrap-${exId}`);
         if (state[activeWorkoutKey][exId].length === totalSetsInEx) {
             exWrap.classList.add('completed');
@@ -668,11 +682,9 @@
         }
     }
 
-    /* AUTO-RESET E OVERLAYS */
     function triggerFinishOverlay() {
         const durationMin = Math.max(1, Math.round((Date.now() - workoutStartTime) / 60000));
         
-        // Salva dia do treino pro calendário
         const historyDays = JSON.parse(localStorage.getItem('rob_history_v8') || '[]');
         const todayIdx = new Date().getDay();
         if(!historyDays.includes(todayIdx)) {
@@ -726,7 +738,6 @@
         updateProfileStats();
     }
 
-    /* CENTRAL DE DADOS (PERFIL) */
     function updateProfileStats() {
         const state = JSON.parse(localStorage.getItem('rob_workout_state_v8') || '{}');
         let completedWorkouts = 0;
@@ -774,13 +785,11 @@
         heatmapContainer.innerHTML = heatHtml;
     }
 
-    /* TOOLS (1RM & WEIGHT LOG) */
     function calcularRM() {
         const peso = parseFloat(document.getElementById('rm-peso').value);
         const reps = parseInt(document.getElementById('rm-reps').value);
         
         if(peso && reps) {
-            // Fórmula Epley
             const rm = Math.round(peso * (1 + reps / 30));
             document.getElementById('rm-max').innerText = `${rm} KG`;
             document.getElementById('rm-80').innerText = `${Math.round(rm * 0.8)} kg`;
